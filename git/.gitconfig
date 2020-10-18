@@ -1,0 +1,25 @@
+[user]
+	email = ymdatta.work@gmail.com
+	name = Mohana Datta Yelugoti
+[format]
+	signoff = true
+[core]
+	editor = emacsclient
+	excludesfile = /home/mohanadatta/.gitignore_global
+[alias]
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  	d = diff --src-prefix='a/ ' --dst-prefix='b/ '
+	s = status --short
+	pr = pull --rebase
+	ca = commit --amend
+	unadd = reset HEAD
+[sendemail]
+	smtpserver = smtp.googlemail.com
+	chainreplyto = false
+	smtpencryption = tls
+	smtpuser = ymdatta.work@gmail.com
+	smtpserverport = 587
+	annotate = true
+[merge]
+	tool = meld

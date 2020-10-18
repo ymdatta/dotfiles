@@ -1,0 +1,50 @@
+
+;; ----- smex-history -----
+(
+ toggle-frame-fullscreen
+ hexl-mode
+ hexl-next-line
+ comment-region
+ uncomment-region
+ deadgrep
+ ansi-term
+)
+
+;; ----- smex-data -----
+(
+ (smex-major-mode-commands . 1)
+ (js-find-symbol . 1)
+ (try . 3)
+ (undo-tree-mode . 1)
+ (customize-themes . 3)
+ (undo-tree-redo . 1)
+ (undo-tree-visualizer-mode . 1)
+ (indent-region . 6)
+ (indent-rigidly . 1)
+ (load-file . 14)
+ (use-package-lint . 1)
+ (load-theme . 3)
+ (smart-mode-line-enable . 2)
+ (sml/apply-theme . 3)
+ (sml/customize . 1)
+ (customize-group . 1)
+ (which-key-mode . 2)
+ (help . 1)
+ (xkcd-get-latest . 1)
+ (xkcd . 1)
+ (deadgrep . 5)
+ (delete-trailing-whitespace . 3)
+ (magit-checkout-stage . 1)
+ (magit-branch-checkout . 1)
+ (magit-worktree-checkout . 1)
+ (diff-mode . 2)
+ (diff . 1)
+ (eshell . 1)
+ (animate-birthday-present . 2)
+ (ansi-term . 1)
+ (comment-region . 4)
+ (uncomment-region . 1)
+ (hexl-mode . 3)
+ (hexl-next-line . 1)
+ (toggle-frame-fullscreen . 2)
+)
