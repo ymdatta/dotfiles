@@ -228,16 +228,8 @@ if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
 # if this is interactive shell, then bind 'kill last command' to Ctrl-x k
 if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 
-# Setting environment variable for ESP8266_RTOS_SDK, so that toolchain
-# programs can access it.
-export IDF_PATH=/home/mohanadatta/sem8/RTOS/esp/ESP8266_RTOS_SDK
-
-
-# To make 'xtensa-lx106-elf' available for all terminal sessions.
-# This was necessary when working with ESP8266 RTOS SDK.
-
-# But, we don't want this added all the time, so we create an alias,
-# to get the toolchain only when we need it.
-alias get_lx106='export PATH="$PATH:$HOME/sem8/RTOS/esp/xtensa-lx106-elf/bin"'
-PATH=/home/mohanadatta/sem8/PA/tools/simplescalar/How-to-install-SimpleScalar-on-Ubuntu/build/bin:$PATH
-PATH=/home/mohanadatta/sem8/PA/tools/simplescalar/How-to-install-SimpleScalar-on-Ubuntu/build:$PATH
+# alias to create TAGS for a C source code in the directory, these etags
+# can be used for fast searching of the source code.
+# Reference:
+# https://www.gnu.org/software/emacs/manual/html_node/emacs/Tags-Tables.html#FOOT15
+alias create_c_etags='find . -name "*.[chCH]" -print | etags -'
