@@ -26,10 +26,17 @@
 (setq-default fill-column 80)
 
 (setq inhibit-startup-message t)
-(tool-bar-mode -1)
 
-;; Display time on modeline
-(display-time-mode 1)
+;; Disable menu bar, tool bar, scroll bar mode.
+;; Refer: https://git.sr.ht/~technomancy/better-defaults/tree/master/better-defaults.el
+(unless (eq window-system 'ns)
+  (menu-bar-mode -1))
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
+(when (fboundp 'horizontal-scroll-bar-mode)
+  (horizontal-scroll-bar-mode -1))
 
 ;;Everytime yes or no option is changed to y or n.
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -49,24 +56,24 @@
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
 (use-package try
- :ensure t)
+  :ensure t)
 
 (use-package deadgrep
   :ensure t)
 
 (use-package which-key
- :ensure t
- :config (which-key-mode 1))
+  :ensure t
+  :config (which-key-mode 1))
 
 (use-package org-bullets
- :ensure t
- :config
- (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
 
 
 ;;For org-babel
 (org-babel-do-load-languages
-  'org-babel-load-languages '((C . t) (gnuplot . t)))
+ 'org-babel-load-languages '((C . t) (gnuplot . t)))
 ;; add additional languages with '((language . t)))
 
 ;; Change org-plot/gnuplot key
@@ -77,17 +84,17 @@
 ;;   :ensure t)
 
 ;; org-reveal: Exports org-mode contents to Reveal.js HTML presentation
- (use-package ox-reveal
-   :ensure t
-   :config
-   (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
-   (setq org-reveal-mathjax t))
+(use-package ox-reveal
+  :ensure t
+  :config
+  (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+  (setq org-reveal-mathjax t))
 
- (use-package htmlize
-   :ensure t)
+(use-package htmlize
+  :ensure t)
 
 (use-package counsel
-   :ensure t)
+  :ensure t)
 
 (use-package ivy
   :ensure t
@@ -111,16 +118,16 @@
     (setq ivy-use-virtual-buffers t)
     (setq ivy-display-style 'fancy)
     (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
-  ))
+    ))
 
 (use-package undo-tree
- :ensure t
- :config (global-undo-tree-mode 1))
+  :ensure t
+  :config (global-undo-tree-mode 1))
 
 (use-package flycheck
- :ensure t
- :init
- (global-flycheck-mode t))
+  :ensure t
+  :init
+  (global-flycheck-mode t))
 
 ;; Setting style to linux - what
 ;; the Linux developers use for kernel development
@@ -135,7 +142,7 @@
 ;; binding.
 
 ;; Taken from magit manual.
- (use-package magit
+(use-package magit
   :ensure t
   :config (global-set-key (kbd "C-x g") 'magit-status))
 
@@ -143,7 +150,7 @@
   :ensure t)
 
 (use-package ir-black-theme
- :ensure t)
+  :ensure t)
 
 (use-package docker-tramp
   :ensure t)

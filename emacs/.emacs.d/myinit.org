@@ -57,14 +57,21 @@ relative-compose:  0
 * Interface tweaks
 
   #+BEGIN_SRC emacs-lisp
-(setq inhibit-startup-message t)
-(tool-bar-mode -1)
+    (setq inhibit-startup-message t)
 
-;; Display time on modeline
-(display-time-mode 1)
+    ;; Disable menu bar, tool bar, scroll bar mode.
+    ;; Refer: https://git.sr.ht/~technomancy/better-defaults/tree/master/better-defaults.el
+    (unless (eq window-system 'ns)
+      (menu-bar-mode -1))
+    (when (fboundp 'tool-bar-mode)
+      (tool-bar-mode -1))
+    (when (fboundp 'scroll-bar-mode)
+      (scroll-bar-mode -1))
+    (when (fboundp 'horizontal-scroll-bar-mode)
+      (horizontal-scroll-bar-mode -1))
 
-;;Everytime yes or no option is changed to y or n.
-(fset 'yes-or-no-p 'y-or-n-p)
+    ;;Everytime yes or no option is changed to y or n.
+    (fset 'yes-or-no-p 'y-or-n-p)
   #+END_SRC
 
   #+RESULTS:
@@ -73,19 +80,19 @@ relative-compose:  0
 * Terminal configuration
   Taken from [[(prefer-coding-system 'utf-8)%0A(set-default-coding-systems 'utf-8)%0A(set-terminal-coding-system 'utf-8)%0A(set-keyboard-coding-system 'utf-8)%0A;; backwards compatibility as default-buffer-file-coding-system%0A;; is deprecated in 23.2.%0A(if (boundp 'buffer-file-coding-system)%0A    (setq-default buffer-file-coding-system 'utf-8)%0A  (setq default-buffer-file-coding-system 'utf-8))%0A%0A;; Treat clipboard input as UTF-8 string first; compound text next, etc.%0A(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))][Working with coding systems and unicode in Emacs]]
   #+BEGIN_SRC emacs-lisp
-  ;;set the coding systems the terminal uses
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-;; backwards compatibility as default-buffer-file-coding-system
-;; is deprecated in 23.2.
-(if (boundp 'buffer-file-coding-system)
-    (setq-default buffer-file-coding-system 'utf-8)
-  (setq default-buffer-file-coding-system 'utf-8))
+    ;;set the coding systems the terminal uses
+    (prefer-coding-system 'utf-8)
+    (set-default-coding-systems 'utf-8)
+    (set-terminal-coding-system 'utf-8)
+    (set-keyboard-coding-system 'utf-8)
+    ;; backwards compatibility as default-buffer-file-coding-system
+    ;; is deprecated in 23.2.
+    (if (boundp 'buffer-file-coding-system)
+	(setq-default buffer-file-coding-system 'utf-8)
+      (setq default-buffer-file-coding-system 'utf-8))
 
-;; Treat clipboard input as UTF-8 string first; compound text next, etc.
-(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+    ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
+    (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
   #+END_SRC
 
   #+RESULTS:
@@ -95,8 +102,8 @@ relative-compose:  0
 
   As the name suggests, try a package before installing it!
   #+BEGIN_SRC emacs-lisp
-  (use-package try
-   :ensure t)
+    (use-package try
+      :ensure t)
   #+END_SRC
 
   #+RESULTS:
@@ -113,8 +120,8 @@ relative-compose:  0
    codebase like linux-kernel, it worked pretty well.
 
    #+BEGIN_SRC emacs-lisp
-   (use-package deadgrep
-     :ensure t)
+     (use-package deadgrep
+       :ensure t)
    #+END_SRC
 
    #+RESULTS:
@@ -124,9 +131,9 @@ relative-compose:  0
   Brings up some help
 
   #+BEGIN_SRC emacs-lisp
-  (use-package which-key
-   :ensure t
-   :config (which-key-mode 1))
+    (use-package which-key
+      :ensure t
+      :config (which-key-mode 1))
   #+END_SRC
 
   #+RESULTS:
@@ -136,14 +143,14 @@ relative-compose:  0
 
   #+BEGIN_SRC emacs-lisp
     (use-package org-bullets
-     :ensure t
-     :config
-     (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+      :ensure t
+      :config
+      (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
 
 
     ;;For org-babel
     (org-babel-do-load-languages
-      'org-babel-load-languages '((C . t) (gnuplot . t)))
+     'org-babel-load-languages '((C . t) (gnuplot . t)))
     ;; add additional languages with '((language . t)))
 
     ;; Change org-plot/gnuplot key
@@ -154,14 +161,14 @@ relative-compose:  0
     ;;   :ensure t)
 
     ;; org-reveal: Exports org-mode contents to Reveal.js HTML presentation
-     (use-package ox-reveal
-       :ensure t
-       :config
-       (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
-       (setq org-reveal-mathjax t))
+    (use-package ox-reveal
+      :ensure t
+      :config
+      (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+      (setq org-reveal-mathjax t))
 
-     (use-package htmlize
-       :ensure t)
+    (use-package htmlize
+      :ensure t)
 
   #+END_SRC
 
@@ -174,32 +181,32 @@ relative-compose:  0
 
   (Looks like counsel is requiremnt for swiper!)
   #+BEGIN_SRC emacs-lisp
-  (use-package counsel
-   :ensure t)
+    (use-package counsel
+      :ensure t)
 
-(use-package ivy
-  :ensure t
-  :diminish (ivy-mode)
-  :bind (("C-x b" . ivy-switch-buffer))
-  :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-display-style 'fancy))
+    (use-package ivy
+      :ensure t
+      :diminish (ivy-mode)
+      :bind (("C-x b" . ivy-switch-buffer))
+      :config
+      (ivy-mode 1)
+      (setq ivy-use-virtual-buffers t)
+      (setq ivy-display-style 'fancy))
 
-(use-package swiper
-  :ensure try
-  :bind (("C-s" . swiper)
-	 ("C-r" . swiper)
-	 ("C-c C-r" . ivy-resume)
-	 ("M-x" . counsel-M-x)
-	 ("C-x C-f" . counsel-find-file))
-  :config
-  (progn
-    (ivy-mode 1)
-    (setq ivy-use-virtual-buffers t)
-    (setq ivy-display-style 'fancy)
-    (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
-  ))
+    (use-package swiper
+      :ensure try
+      :bind (("C-s" . swiper)
+	     ("C-r" . swiper)
+	     ("C-c C-r" . ivy-resume)
+	     ("M-x" . counsel-M-x)
+	     ("C-x C-f" . counsel-find-file))
+      :config
+      (progn
+	(ivy-mode 1)
+	(setq ivy-use-virtual-buffers t)
+	(setq ivy-display-style 'fancy)
+	(define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
+	))
   #+END_SRC
 
   #+RESULTS:
@@ -211,9 +218,9 @@ relative-compose:  0
   Refer: [[http://www.dr-qubit.org/undo-tree/undo-tree.txt][http://www.dr-qubit.org/undo-tree/undo-tree.txt]] for documentation
 
   #+BEGIN_SRC emacs-lisp
-  (use-package undo-tree
-   :ensure t
-   :config (global-undo-tree-mode 1))
+    (use-package undo-tree
+      :ensure t
+      :config (global-undo-tree-mode 1))
   #+END_SRC
 
   #+RESULTS:
@@ -222,10 +229,10 @@ relative-compose:  0
 * Flycheck
 
   #+BEGIN_SRC emacs-lisp
- (use-package flycheck
-  :ensure t
-  :init
-  (global-flycheck-mode t))
+    (use-package flycheck
+      :ensure t
+      :init
+      (global-flycheck-mode t))
   #+END_SRC
 
   #+RESULTS:
@@ -234,12 +241,12 @@ relative-compose:  0
 
   #+BEGIN_SRC emacs-lisp
 
-  ;; Setting style to linux - what
-  ;; the Linux developers use for kernel development
-  (setq c-default-style "linux")
+    ;; Setting style to linux - what
+    ;; the Linux developers use for kernel development
+    (setq c-default-style "linux")
 
-  ;; automatically indent when press RET
-  (global-set-key (kbd "RET") 'newline-and-indent)
+    ;; automatically indent when press RET
+    (global-set-key (kbd "RET") 'newline-and-indent)
 
   #+END_SRC
 
@@ -250,15 +257,15 @@ relative-compose:  0
 
   #+BEGIN_SRC emacs-lisp
 
-;; To display information about the Current Git repository,
-;; 'M-x magit-status RET' is used. This is a basic command,
-;; which is used a lot. So, this is given a global key
-;; binding.
+    ;; To display information about the Current Git repository,
+    ;; 'M-x magit-status RET' is used. This is a basic command,
+    ;; which is used a lot. So, this is given a global key
+    ;; binding.
 
-;; Taken from magit manual.
- (use-package magit
-  :ensure t
-  :config (global-set-key (kbd "C-x g") 'magit-status))
+    ;; Taken from magit manual.
+    (use-package magit
+      :ensure t
+      :config (global-set-key (kbd "C-x g") 'magit-status))
   #+END_SRC
 
   #+RESULTS:
@@ -269,8 +276,8 @@ relative-compose:  0
   Nice package to view xkcd comic from emacs
 
   #+BEGIN_SRC emacs-lisp
-  (use-package xkcd
-    :ensure t)
+    (use-package xkcd
+      :ensure t)
   #+END_SRC
 
   #+RESULTS:
@@ -281,8 +288,8 @@ relative-compose:  0
   Github link: [[https://github.com/jmdeldin/ir-black-theme.el][jmeldin: ir-black-theme.el]]
 
   #+BEGIN_SRC emacs-lisp
-  (use-package ir-black-theme
-   :ensure t)
+    (use-package ir-black-theme
+      :ensure t)
   #+END_SRC
 
   #+RESULTS:
@@ -297,8 +304,8 @@ relative-compose:  0
   containers easily with this package and modify the files in the container.
 
   #+BEGIN_SRC emacs-lisp
-  (use-package docker-tramp
-    :ensure t)
+    (use-package docker-tramp
+      :ensure t)
   #+END_SRC
 
   #+RESULTS:
