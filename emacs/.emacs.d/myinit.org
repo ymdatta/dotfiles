@@ -318,12 +318,12 @@ relative-compose:  0
   not keep it up-to-date. The *auto-package-update* package helps in solving that problem.
 
   #+BEGIN_SRC emacs-lisp
-    ;; (use-package auto-package-update
-    ;;   :ensure t
-    ;;   :config
-    ;;   (setq auto-package-update-delete-old-versions t)
-    ;;   (setq auto-package-update-hide-results t)
-    ;;   (auto-package-update-maybe))
+    (use-package auto-package-update
+       :ensure t
+       :config
+       (setq auto-package-update-delete-old-versions t)
+       (setq auto-package-update-hide-results t)
+       (auto-package-update-maybe))
   #+END_SRC
 
 * Tags for browsing source code
