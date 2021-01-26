@@ -122,14 +122,14 @@ fi
 source /etc/environment
 
 # Emacs-client aliases.
-alias ecw="emacsclient26 --c"
+alias ecw="emacsclient --c"
 
 # Default Editor conf.
 export ALTERNATE_EDITOR=""
 # $EDITOR should open in terminal
-export EDITOR="emacsclient26 -t"
+export EDITOR="emacsclient -t"
 # $VISUAL opens in GUI
-export VISUAL="emacsclient26 --c"
+export VISUAL="emacsclient --c"
 
 # Emacs shell is a basic one, which doesn't understand the escape
 # sequences, so we get strange characters. The below config solves
