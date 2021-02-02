@@ -168,3 +168,9 @@
 ;;    (setq auto-package-update-delete-old-versions t)
 ;;    (setq auto-package-update-hide-results t)
 ;;    (auto-package-update-maybe))
+
+(setq explicit-shell-file-name "/usr/bin/bash")
+
+(setq set-buffer-encoding-system "unix")
+
+(setq woman-manpath '("C:/man"))

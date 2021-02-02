@@ -351,3 +351,45 @@ relative-compose:  0
 
   #+RESULTS:
   : t
+* Windows-configuration
+** Tramp configuration for remote shell
+
+  #+BEGIN_SRC emacs-lisp
+    (setq explicit-shell-file-name "/usr/bin/bash")
+  #+END_SRC
+
+  #+RESULTS:
+** Buffer file encoding system
+
+   I found that when i had edited files in the emacs buffer
+   on windows, an '\r' is added at the end of the lines.
+
+   The bash was not able to recognize this and began to
+   throw errors.
+
+   The solution to this problem is to convert DOS/Windows
+   newline characters to UNIX format.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq set-buffer-encoding-system "unix")
+  #+END_SRC
+
+  #+RESULTS:
+  : unix
+** woman-manpath
+
+   When 'man' mode is issued on remote server, it actually
+   searches on the local machine for the asked man page.
+
+   First install the man pages tarball on the windows.
+   Extract the tarball into a folder called 'man' in
+   Local Disk (C:)
+
+   Set woman path so that it can access them.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq woman-manpath '("C:/man"))
+  #+END_SRC
+
+   For more information on the womna-manpath variable,
+   refer [[https://www.gnu.org/software/emacs/manual/html_node/woman/Interface-Options.html][here]].
