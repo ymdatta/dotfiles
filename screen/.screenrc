@@ -1,0 +1,4 @@
+shell ${SHELL}
+caption always "%n(%t): %C"
+defscrollback 4098
+bing '' windowlist -b
