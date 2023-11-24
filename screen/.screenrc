@@ -1,4 +1,8 @@
-shell ${SHELL}
-caption always "%n(%t): %C"
+autodetach on 
+startup_message off 
+hardstatus alwayslastline 
+shelltitle 'bash'
 defscrollback 4098
-bing '' windowlist -b
+
+hardstatus string '%{gk}[%{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= w}%?%+Lw%?%? %{g}][%{d}%l%{g}][ %{= w}%Y/%m/%d %0C:%s%a%{g} ]%{W}'
+
